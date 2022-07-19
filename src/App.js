@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  Box,
+  Cloud,
+  Sparkles,
+  Stars,
+  TrackballControls,
+} from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import styled from "styled-components";
 
-function App() {
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+`;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Canvas
+        colorManagement
+        camera={{ position: [0, 0, 50], fov: 25 }}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <ambientLight />
+        <pointLight position={[10, 10, 5]} />
+        <Box>
+          <meshStandardMaterial attach="material" color="hotpink" />
+        </Box>
+        <Stars count={30000} saturation={1000} />
+        <Cloud opacity={0.2} speed={0.2} width={20} />
+        <TrackballControls />
+        <Sparkles count={1} />
+      </Canvas>
+    </Container>
   );
-}
+};
 
 export default App;
